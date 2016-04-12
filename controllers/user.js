@@ -20,12 +20,10 @@ export async function register (ctx) {
   // ====================
 
 
-  console.log(ctx.request.body)
-  // ctx.body = book
-  // const {done,data} = await User.create(ctx.req)
-  // if (done === true) {
-  //   ctx.body = data
-  // } else {
-  //   ctx.throw(400,'已存在用户')
-  // }
+  const {done,data} = await User.create(ctx.request.body)
+  if (done === true) {
+    ctx.body = data
+  } else {
+    ctx.throw(400,'已存在用户')
+  }
 }

@@ -12,7 +12,7 @@ const userSchema = new Schema({
       message: '邮箱格式错误',
     })
   },
-  name: { type: String, required: true, minlength: 10 },
+  name: { type: String, required: true, minlength: 1 },
   password: { type: String, required: true },
   registed: { type: Date, default: Date.now },
   regdevice: { type: String },
