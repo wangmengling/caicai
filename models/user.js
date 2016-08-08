@@ -14,8 +14,8 @@ const userSchema = new Schema({
   },
   name: { type: String, required: true, minlength: 1 },
   password: { type: String, required: true },
-  registed: { type: Date, default: Date.now },
-  regdevice: { type: String },
+  // registed: { type: Date, default: Date.now },
+  // regdevice: { type: String },
   regcity: { type: String, required: true }
 })
 

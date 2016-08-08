@@ -14,13 +14,13 @@ export async function register (ctx) {
   // const user = await new User(ctx.request.body).save()
   // ctx.body = user
 
-  console.log('asdfasd');
   // ====================
   // mongooose :
   // ====================
 
-
+  console.log(ctx.request.body)
   const {done,data} = await User.create(ctx.request.body)
+
   if (done === true) {
     ctx.body = data
   } else {
