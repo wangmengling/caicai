@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js --exec babel-node"
+    "start": "nodemon app.js --exec babel-node",
+    "startBabel": "node-debug & nodemon index.js"
   },
   "author": "Luckcoding",
   "license": "ISC",

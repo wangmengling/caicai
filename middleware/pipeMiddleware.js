@@ -27,7 +27,6 @@ export default function pipeMiddleware() {
       } else {
         ctx.app.emit('error', err, ctx)
       }
-
     }
   }
 }

@@ -3,7 +3,7 @@ import Koa from 'koa'
 import router from './routers/index'
 import bodyParser from 'koa-bodyparser'
 import logger from 'koa-logger'
-import convert from 'koa-convert'
+import convert from 'koa-convert'  //将koa1  转换为koa2
 import db from './utils/db'
 import graphQLHTTP from 'koa-graphql';
 import mount from 'koa-mount';
@@ -24,11 +24,17 @@ const app = new Koa()
 app.jsonSpaces = 0 // 压缩json返回中的空格
 app.keys = ['key']
 
+app.use(convert(logger()))
 app.use(convert(bodyParser()))
+<<<<<<< Updated upstream
 // app.use(pipeMiddleware())
 // app.use(function *(){
 //   this.body = 'Hello World';
 // });
+=======
+app.use(pipeMiddleware())
+app.use(convert(session(app)))
+>>>>>>> Stashed changes
 
 router(app)
 
