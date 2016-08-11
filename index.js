@@ -66,7 +66,7 @@ const compiler = webpack({
       },
     ],
   },
-  output: { filename: 'Index.js', path: '/' },
+  output: { filename: 'app.js', path: '/' },
 });
 
 const app = new WebpackDevServer(compiler, {

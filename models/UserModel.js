@@ -3,6 +3,7 @@ import validate from 'mongoose-validator'
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+  id: { type:String, required:true, unique:true, index:true, default:mongoose.Types.ObjectId },
   email: {
     type: String,
     lowercase: true,
@@ -52,4 +53,4 @@ userSchema.statics.create = async function (obj) {
   }
 }
 
-export default mongoose.model('User', userSchema)
+export default mongoose.model('UserModel', userSchema)
