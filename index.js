@@ -1,53 +1,21 @@
 import express from 'express';
-import Koa from 'koa'
-import router from './routers/index'
-import bodyParser from 'koa-bodyparser'
-import logger from 'koa-logger'
-import convert from 'koa-convert'  //将koa1  转换为koa2
-import db from './utils/db'
+import Koa from 'koa';
 import graphQLHTTP from 'koa-graphql';
 import mount from 'koa-mount';
+import convert from 'koa-convert';
 import path from 'path';
-
-// import cros from './middleware/crosMiddleware'
-// import pipeMiddleware from './middleware/pipeMiddleware'
-
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-
 import { schema } from './data/schema';
+import { newSchema } from './data/newSchema';
 
 const APP_PORT = 3030;
 const GRAPHQL_PORT = 8080;
 
-// const app = new Koa()
-//
-//
-//
-// app.jsonSpaces = 0 // 压缩json返回中的空格
-// app.keys = ['key']
-//
-// app.use(convert(logger()))
-// app.use(convert(bodyParser()))
-// // app.use(pipeMiddleware())
-// // app.use(function *(){
-// //   this.body = 'Hello World';
-// // });
-// app.use(pipeMiddleware())
-// app.use(convert(session(app)))
-// router(app)
-// app.use('/', express.static(path.resolve(__dirname, 'public')));
-
-// app.use(mount('/', convert(graphQLHTTP({ schema, pretty: true }))));
-// app.listen(GRAPHQL_PORT, () => console.log(
-//   `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}`
-// ));
-
-// app.listen(3030, () => console.log(`✅ The server is running at http://localhost:3030/`))
-
+// Expose a GraphQL endpoint
 const graphQLServer = new Koa();
 
-graphQLServer.use(mount('/', convert(graphQLHTTP({ schema, pretty: true }))));
+graphQLServer.use(mount('/', convert(graphQLHTTP({ newSchema, pretty: true }))));
 
 graphQLServer.listen(GRAPHQL_PORT, () => console.log(
   `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}`
@@ -63,10 +31,11 @@ const compiler = webpack({
         exclude: /node_modules/,
         loader: 'babel',
         test: /\.js$/,
+        // query: {stage: 0, plugins: ['./build/babelRelayPlugin']}
       },
     ],
   },
-  output: { filename: 'app.js', path: '/' },
+  output: { filename: 'Index.js', path: '/' },
 });
 
 const app = new WebpackDevServer(compiler, {

@@ -3,32 +3,32 @@ import Relay from 'react-relay';
 
 class Home extends React.Component {
   render() {
-    return (
-      <div>
-        <h1>Widget list</h1>
-        <ul>
-          {this.props.viewer.widgets.edges.map(edge =>
-            <li key={edge.node.id}>{edge.node.name} (ID: {edge.node.id})</li>
-          )}
-        </ul>
-      </div>
-    );
+    // Relay will materialize this prop based on the
+    // result of the query in the next component.
+    const {hello} = this.props.greetings;
+    return <h1>{hello}</h1>;
   }
 }
 
-export default Relay.createContainer(App, {
+/**
+ * #2 - Relay containers
+ * Compose your React components with a declaration of
+ * the GraphQL query fragments that fetch their data.
+ *
+ * To learn more about Relay containers, visit:
+ *   https://facebook.github.io/relay/docs/guides-containers.html
+ */
+export default Relay.createContainer(Home, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
-        widgets(first: 10) {
-          edges {
-            node {
-              id,
-              name,
-            },
-          },
-        },
+    // This GraphQL query executes against
+    // the schema in the 'schema' tab above.
+    //
+    // To learn more about Relay.QL, visit:
+    //   https://facebook.github.io/relay/docs/api-reference-relay-ql.html
+    greetings: () => Relay.QL`
+      fragment on Greetings {
+        hello,
       }
     `,
-  },
+  }
 });
