@@ -6,19 +6,10 @@ export default class extends Relay.Route {
 
 
   static queries = {
-    greetings: () => Relay.QL`query { greetings }`,
+    viewer: () => Relay.QL`
+      query {
+        users
+      }
+    `,
   };
-
-  // static queries = {
-  //   // Here, we compose your Relay container's
-  //   // 'greetings' fragment into the 'greetings'
-  //   // field at the root of the GraphQL schema.
-  //   greetings: (Component) => Relay.QL`
-  //     query GreetingsQuery {
-  //       greetings {
-  //         ${Component.getFragment('greetings')},
-  //       },
-  //     }
-  //   `,
-  // };
 }

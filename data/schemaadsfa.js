@@ -16,12 +16,27 @@ const GREETINGS = {
  * that is of the string type.
  */
 const GreetingsType = new GraphQLObjectType({
-  name: 'Greetings',
+  name: 'greetings',
   fields: () => ({
     hello: {type: GraphQLString},
   }),
 });
 
+
+const RootQuery = new GraphQLObjectType({
+  name: 'Query',
+  fields: () => ({
+    greetings: {
+      type: GreetingsType,
+      // Here we define a resolver that returns
+      // the data defined above. Were this schema
+      // executing on the server side, you could
+      // write a resolve method that fetches
+      // live data from a database.
+      resolve: () => GREETINGS,
+    },
+  }),
+});
 /**
  * The schema.
  * Here we export a schema that offers one root
@@ -32,18 +47,5 @@ const GreetingsType = new GraphQLObjectType({
  *   https://github.com/graphql/graphql-relay-js
  */
 export default new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      greetings: {
-        type: GreetingsType,
-        // Here we define a resolver that returns
-        // the data defined above. Were this schema
-        // executing on the server side, you could
-        // write a resolve method that fetches
-        // live data from a database.
-        resolve: () => GREETINGS,
-      },
-    }),
-  }),
+  query: RootQuery
 });

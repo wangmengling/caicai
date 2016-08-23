@@ -7,7 +7,7 @@ import path from 'path';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import { schema } from './data/schema';
-import { newSchema } from './data/newSchema';
+// import { newSchema } from './data/newSchema';
 
 const APP_PORT = 3030;
 const GRAPHQL_PORT = 8080;
@@ -15,7 +15,7 @@ const GRAPHQL_PORT = 8080;
 // Expose a GraphQL endpoint
 const graphQLServer = new Koa();
 
-graphQLServer.use(mount('/', convert(graphQLHTTP({ newSchema, pretty: true }))));
+graphQLServer.use(mount('/', convert(graphQLHTTP({ schema, pretty: true }))));
 
 graphQLServer.listen(GRAPHQL_PORT, () => console.log(
   `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}`
