@@ -35,6 +35,17 @@ userSchema.statics.findById = async function (_id) {
   }
 }
 
+userSchema.statics.findAll = async function () {
+  const exists = await this.findAll()
+  if (exists) {
+    return {
+      done: true,
+      data: exists
+    }
+  }
+}
+
+
 userSchema.statics.create = async function (obj) {
   const user = new this(obj)
 
