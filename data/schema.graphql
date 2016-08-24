@@ -4,15 +4,15 @@ schema {
 }
 
 type AppRootMutation {
-  addUser(name: String!, surname: String!, age: Int): UserType
+  addUser(name: String!, surname: String!, age: Int): User
 }
 
 type AppRootQuery {
-  user(id: ID): UserType
-  users: [UserType]
+  user(id: ID, name: String): User
+  users: [User]
 }
 
-type UserType {
+type User {
   _id: ID!
   name: String
   email: String

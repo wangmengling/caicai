@@ -25,7 +25,7 @@ import UserModel from './UserModel.js';
 
 //GraphQLUser Type
 export const UserType = new GraphQLObjectType({
-  name: 'UserType',
+  name: 'User',
   description: 'A user',
   fields: () => ({
     _id: {
@@ -50,16 +50,19 @@ export const UserType = new GraphQLObjectType({
 export const UserQueries =  {
   users: {
     type: new GraphQLList(UserType),
-    resolve: UserModel.findById
+    resolve:  () => UserModel.findById(),
   },
   user: {
     type: UserType,
     args: {
       id: {
         type: GraphQLID
-      }
+      },
+      name: {
+        type: GraphQLString
+      },
     },
-    resolve: UserModel.create
+    resolve:  () => UserModel.findById(),
   }
 };
 // UserMutations

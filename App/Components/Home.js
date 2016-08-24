@@ -7,9 +7,7 @@ class Home extends React.Component {
       <div>
         <h1>Widget list</h1>
         <ul>
-          {this.props.viewer.widgets.edges.map(edge =>
-            <li key={edge.node.id}>{edge.node.name} (ID: {edge.node.id})</li>
-          )}
+          {this.props.user.name}
         </ul>
       </div>
     );
@@ -26,16 +24,9 @@ class Home extends React.Component {
  */
 export default Relay.createContainer(Home, {
   fragments: {
-    users: () => Relay.QL`
+    user: () => Relay.QL`
       fragment on User {
-        findById(10) {
-          edges {
-            node {
-              id,
-              name,
-            },
-          },
-        },
+        name
       }
     `,
   },
