@@ -52,22 +52,26 @@ export const UserType = new GraphQLObjectType({
 export const UserQueries =  {
   users: {
     type: new GraphQLList(UserType),
-    // resolve:  () => UserModel.findById("579a0f2b89aab21406354e76"),
+    resolve:  () => UserModel.findById("579a0f2b89aab21406354e76"),
   },
   user: {
     type: UserType,
-    // args: {
-    //   id: {
-    //     type: GraphQLID
-    //   },
-    //   name: {
-    //     type: GraphQLString
-    //   },
-    // },
-    // resolve:  () => UserModel.findById("579a0f2b89aab21406354e76"),
-     resolve:  () => UserModel.findById(),
+    args: {
+      id: {
+        type: GraphQLID
+      },
+      name: {
+        type: GraphQLString
+      },
+    },
+    resolve:  () => UserModel.findById("579a0f2b89aab21406354e76"),
+    //  resolve:  () => UserModel.findById(),
   }
 };
+
+
+
+
 // UserMutations
 export const UserMutations = {
   addUser:{

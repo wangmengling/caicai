@@ -8,7 +8,7 @@ class Home extends React.Component {
       <div>
         <h1>Widget list</h1>
         <ul>
-          dfgf
+          dfgf{this.props.user}
         </ul>
       </div>
     );
