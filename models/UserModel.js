@@ -20,13 +20,32 @@ const userSchema = new Schema({
   regcity: { type: String, required: true }
 })
 
+// var UserModel = mongoose.model('UserModel', userSchema)
+
 /**
  * todo
  */
 
+ function getUserById(id) {
+
+   return new Promise((resolve, reject) => {
+     UserModel.findById(id, function (err, doc){
+       console.log(doc)
+       err ? reject(err) : resolve(doc);
+     // doc 是单个文档
+     });
+   });
+ }
+
+ exports.getUserById = getUserById;
+
 // find by id
 userSchema.statics.findById = async function (_id) {
+  console.log("adfasdf")
+  // console.log(_id)
   const exists = await this.findById(_id)
+  // console.log(exists)
+  console.log("111111")
   if (exists) {
     return {
       done: true,
@@ -35,15 +54,17 @@ userSchema.statics.findById = async function (_id) {
   }
 }
 
-userSchema.findById = async function (_id) {
-  const exists = await this.findById(_id)
-  if (exists) {
-    return {
-      done: true,
-      data: exists
-    }
-  }
-}
+// userSchema.findById = async function (_id) {
+//   const exists = await this.findById(_id)
+//   console.log(exists)
+//   console.log("asdfad")
+//   if (exists) {
+//     return {
+//       done: true,
+//       data: exists
+//     }
+//   }
+// }
 
 userSchema.statics.findAll = async function () {
   const exists = await this.findAll()

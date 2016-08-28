@@ -52,7 +52,7 @@ export const UserType = new GraphQLObjectType({
 export const UserQueries =  {
   users: {
     type: new GraphQLList(UserType),
-    resolve:  () => UserModel.findById("579a0f2b89aab21406354e76"),
+    // resolve:  () => UserModel.findById("579a0f2b89aab21406354e76"),
   },
   user: {
     type: UserType,
@@ -64,13 +64,23 @@ export const UserQueries =  {
         type: GraphQLString
       },
     },
-    resolve:  () => UserModel.findById("579a0f2b89aab21406354e76"),
-    //  resolve:  () => UserModel.findById(),
+    resolve: (root, {id}) => {
+      return UserModel.getUserById(id)
+    }
+    // resolve: UserModel.getUserById('579a0f2b89aab21406354e76',function(err,doc){
+    // //找到所有名字叫krouky的人
+    //   return doc
+    // })
+    // resolve: () => {
+    //   // return new Promise((resolve, reject) => {
+    //     UserModel.getUserById('579a0f2b89aab21406354e76',function(err, res){
+    //       console.log(res)
+    //       err ? reject(err): resolve(res);
+    //     });
+    //   // });
+    // }
   }
 };
-
-
-
 
 // UserMutations
 export const UserMutations = {

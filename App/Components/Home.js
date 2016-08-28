@@ -4,11 +4,12 @@ import Relay from 'react-relay';
 class Home extends React.Component {
   render() {
     // console.log(this.props.user)
+    var user = this.props.user;
     return (
       <div>
         <h1>Widget list</h1>
         <ul>
-          dfgf{this.props.user}
+          dfgf{user.name}
         </ul>
       </div>
     );
