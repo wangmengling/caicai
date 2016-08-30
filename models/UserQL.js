@@ -52,7 +52,7 @@ export const UserType = new GraphQLObjectType({
 export const UserQueries =  {
   users: {
     type: new GraphQLList(UserType),
-    // resolve:  () => UserModel.findById("579a0f2b89aab21406354e76"),
+    // resolve:  () => UserModel.userSchema.findAll(),
   },
   user: {
     type: UserType,
@@ -64,7 +64,8 @@ export const UserQueries =  {
         type: GraphQLString
       },
     },
-    resolve: (root, {id}) => UserModel.getUserById(id)
+    // resolve: (root, {id}) => UserModel.getUserById(id)
+    resolve: (root, {id}) => UserModel.findAllUser(id)
   },
 };
 

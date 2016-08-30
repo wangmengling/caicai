@@ -33,6 +33,19 @@ var getUserById =  function (id) {
 }
 exports.getUserById = getUserById
 
+var findAllUser = async function (id) {
+  console.log(id)
+  const exists = await UserModel.find()
+  console.log(exists)
+  if (exists) {
+    return {
+      done: true,
+      data: exists
+    }
+  }
+}
+exports.findAllUser = findAllUser
+
 // find by id
 userSchema.statics.getUserById = async function (_id) {
   const exists = await this.findById(_id)
@@ -44,8 +57,10 @@ userSchema.statics.getUserById = async function (_id) {
   }
 }
 
-userSchema.statics.findAll = async function () {
-  const exists = await this.findAll()
+userSchema.statics.findAll = async function (id) {
+  console.log("ddd")
+  const exists = await this.find()
+  console.log(exists)
   if (exists) {
     return {
       done: true,
@@ -72,5 +87,3 @@ userSchema.statics.create = async function (obj) {
     }
   }
 }
-
-
