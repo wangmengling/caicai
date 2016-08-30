@@ -5,7 +5,8 @@
 			"name": "Launch",
 			"type": "node",
 			"request": "launch",
-			"program": "${workspaceRoot}/index.js",
+			// "program": "${workspaceRoot}/index.js",
+			"program": "${workspaceRoot}/node_modules/babel-cli/bin/babel-node.js",
 			"stopOnEntry": false,
 			"args": [],
 			"cwd": "${workspaceRoot}",
@@ -19,6 +20,9 @@
 			},
 			"externalConsole": false,
 			"sourceMaps": false,
+			"args": [
+                "${workspaceRoot}/index.js"
+            ],
 			"outDir": null
 		},
 		{

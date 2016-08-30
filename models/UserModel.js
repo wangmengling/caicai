@@ -6,46 +6,36 @@ const userSchema = new Schema({
   id: { type:String, required:true, unique:true, index:true, default:mongoose.Types.ObjectId },
   email: {
     type: String,
-    lowercase: true,
+    // lowercase: true,
     required: true,
-    validate: validate({
-      validator: 'isEmail',
-      message: '邮箱格式错误',
-    })
+    // validate: validate({
+    //   validator: 'isEmail',
+    //   message: '邮箱格式错误',
+    // })
   },
   name: { type: String, required: true, minlength: 1 },
   password: { type: String, required: true },
   // registed: { type: Date, default: Date.now },
   // regdevice: { type: String },
-  regcity: { type: String, required: true }
-})
+  // regcity: { type: String, required: true }
+});
 
-// var UserModel = mongoose.model('UserModel', userSchema)
+const UserModel = mongoose.model('user', userSchema);
+// export default UserModel;
+exports.userSchema = UserModel;
 
-/**
- * todo
- */
-
- function getUserById(id) {
-
-   return new Promise((resolve, reject) => {
-     UserModel.findById(id, function (err, doc){
-       console.log(doc)
-       err ? reject(err) : resolve(doc);
-     // doc 是单个文档
-     });
-   });
- }
-
- exports.getUserById = getUserById;
+var getUserById =  function (id) {
+    return new Promise((resolve, reject) => {
+       UserModel.findOne({ id: id}, function (err, adventure) {
+        err ? reject(err) : resolve(adventure);
+    });
+  });
+}
+exports.getUserById = getUserById
 
 // find by id
-userSchema.statics.findById = async function (_id) {
-  console.log("adfasdf")
-  // console.log(_id)
+userSchema.statics.getUserById = async function (_id) {
   const exists = await this.findById(_id)
-  // console.log(exists)
-  console.log("111111")
   if (exists) {
     return {
       done: true,
@@ -53,18 +43,6 @@ userSchema.statics.findById = async function (_id) {
     }
   }
 }
-
-// userSchema.findById = async function (_id) {
-//   const exists = await this.findById(_id)
-//   console.log(exists)
-//   console.log("asdfad")
-//   if (exists) {
-//     return {
-//       done: true,
-//       data: exists
-//     }
-//   }
-// }
 
 userSchema.statics.findAll = async function () {
   const exists = await this.findAll()
@@ -95,4 +73,4 @@ userSchema.statics.create = async function (obj) {
   }
 }
 
-export default mongoose.model('UserModel', userSchema)
+

@@ -5,6 +5,7 @@ class Home extends React.Component {
   render() {
     // console.log(this.props.user)
     var user = this.props.user;
+    console.log(user)
     return (
       <div>
         <h1>Widget list</h1>

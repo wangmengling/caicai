@@ -8,6 +8,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import { schema } from './data/schema';
 // import { newSchema } from './data/newSchema';
+import {} from './utils/db.js'
 
 const APP_PORT = 3030;
 const GRAPHQL_PORT = 8080;

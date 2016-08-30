@@ -23,7 +23,7 @@ import {
 
 // import UserModel from './UserModel.js';
 
-import UserModel from './UserModel.js';
+import * as UserModel from './UserModel.js';
 
 //GraphQLUser Type
 export const UserType = new GraphQLObjectType({
@@ -64,22 +64,8 @@ export const UserQueries =  {
         type: GraphQLString
       },
     },
-    resolve: (root, {id}) => {
-      return UserModel.getUserById(id)
-    }
-    // resolve: UserModel.getUserById('579a0f2b89aab21406354e76',function(err,doc){
-    // //找到所有名字叫krouky的人
-    //   return doc
-    // })
-    // resolve: () => {
-    //   // return new Promise((resolve, reject) => {
-    //     UserModel.getUserById('579a0f2b89aab21406354e76',function(err, res){
-    //       console.log(res)
-    //       err ? reject(err): resolve(res);
-    //     });
-    //   // });
-    // }
-  }
+    resolve: (root, {id}) => UserModel.getUserById(id)
+  },
 };
 
 // UserMutations
@@ -87,7 +73,7 @@ export const UserMutations = {
   addUser:{
     type:UserType,
     args: {
-      name:{
+     name:{
         name:'name',
         type:new GraphQLNonNull(GraphQLString)
       },
